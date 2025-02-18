@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Puntaje</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 10px;
+        }
+        input {
+            width: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Puntaje PUCP</h1>
+    <p>IG: <a href="https://www.instagram.com/aulah375?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">aulah</a></p>
+    <table>
+        <tr>
+            <th>Evaluación</th>
+            <th>Puntaje</th>
+            <th>Puntaje Parcial</th>
+            <th>Puntaje Ponderado</th>
+        </tr>
+        <tr>
+            <td>Matemáticas</td>
+            <td><input type="number" id="matematicas" min="0" max="48" onchange="calcular()"></td>
+            <td id="parcial_matematicas">-</td>
+            <td id="ponderado_matematicas">-</td>
+        </tr>
+        <tr>
+            <td>Comprensión Lectora</td>
+            <td><input type="number" id="lectura" min="0" max="28" onchange="calcular()"></td>
+            <td id="parcial_lectura">-</td>
+            <td id="ponderado_lectura">-</td>
+        </tr>
+        <tr>
+            <td>Nota Escolar</td>
+            <td><input type="number" id="nota" min="0" max="20" step="0.01" onchange="calcular()"></td>
+            <td id="parcial_nota">-</td>
+            <td id="ponderado_nota">-</td>
+        </tr>
+        <tr>
+            <th colspan="3">Total</th>
+            <th id="total">-</th>
+        </tr>
+    </table>
+    <h2 id="mensaje"></h2>
+    <script>
+        const tablaMatematicas = [0, 101.3, 176.8, 223.4, 258.1, 286.4, 310.5, 331.7, 350.9, 368.4, 384.6, 399.8, 414.2, 427.9, 441, 453.6, 465.8, 477.6, 489.1, 500.3, 511.4, 522.3, 533, 543.6, 554.2, 564.7, 575.2, 585.8, 596.4, 607.1, 617.9, 629, 640.2, 651.7, 663.5, 675.8, 688.5, 701.9, 716, 731, 747.2, 764.9, 784.6, 807.1, 833.6, 866.5, 911.1, 984.5, 1000];
+        const tablaLectura = [0, 147.6, 224.4, 272.3, 308.4, 338, 363.7, 386.6, 407.7, 427.3, 446, 463.9, 481.4, 498.5, 515.4, 532.4, 549.5, 567, 584.9, 603.6, 623.2, 644.2, 667, 692.5, 721.9, 757.6, 804.9, 880.8, 1000];
+
+        function calcular() {
+            let mat = parseInt(document.getElementById("matematicas").value) || 0;
+            let lec = parseInt(document.getElementById("lectura").value) || 0;
+            let nota = parseFloat(document.getElementById("nota").value) || 0;
+            
+            let parcialMat = tablaMatematicas[mat];
+            let parcialLec = tablaLectura[lec];
+            let parcialNota = (nota / 20) * 1000;
+            
+            let ponderadoMat = parcialMat * 0.48;
+            let ponderadoLec = parcialLec * 0.32;
+            let ponderadoNota = 200 * (parcialNota / 1000);
+            
+            let total = ponderadoMat + ponderadoLec + ponderadoNota;
+            
+            document.getElementById("parcial_matematicas").innerText = parcialMat.toFixed(1);
+            document.getElementById("parcial_lectura").innerText = parcialLec.toFixed(1);
+            document.getElementById("parcial_nota").innerText = parcialNota.toFixed(1);
+            
+            document.getElementById("ponderado_matematicas").innerText = ponderadoMat.toFixed(1);
+            document.getElementById("ponderado_lectura").innerText = ponderadoLec.toFixed(1);
+            document.getElementById("ponderado_nota").innerText = ponderadoNota.toFixed(1);
+            
+            document.getElementById("total").innerText = total.toFixed(1);
+            
+            let mensaje = "";
+            if (total > 700) {
+                mensaje = "Ya ingresaste, ¿para qué pierdes tu tiempo? XD";
+            } else if (total >= 650) {
+                mensaje = "Rota ig";
+            } else {
+                mensaje = "Deja el Roblox";
+            }
+            document.getElementById("mensaje").innerText = mensaje;
+        }
+    </script>
+</body>
+</html>
