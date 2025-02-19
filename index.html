@@ -71,11 +71,11 @@
             
             let parcialMat = tablaMatematicas[mat];
             let parcialLec = tablaLectura[lec];
-            let parcialNota = (nota / 20) * 1000;
+            let parcialNota = nota * 41.62;
             
             let ponderadoMat = parcialMat * 0.48;
             let ponderadoLec = parcialLec * 0.32;
-            let ponderadoNota = 200 * (parcialNota / 1000);
+            let ponderadoNota = 0.2 * parcialNota;
             
             let total = ponderadoMat + ponderadoLec + ponderadoNota;
             
